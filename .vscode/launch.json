@@ -9,14 +9,24 @@
       "name": "Launch Current File with input 1",
       "request": "launch",
       "mainClass": "${file}",
-      "args": ["<", "${workspaceFolder}/input1.txt"]
+      "args": [
+        "<",
+        "${workspaceFolder}/input1.txt",
+        ">",
+        "${workspaceFolder}/output1.txt"
+      ]
     },
     {
       "type": "java",
       "name": "Launch Current File with input 2",
       "request": "launch",
       "mainClass": "${file}",
-      "args": ["<", "${workspaceFolder}/input2.txt"]
+      "args": [
+        "<",
+        "${workspaceFolder}/input2.txt",
+        ">",
+        "${workspaceFolder}/output2.txt"
+      ]
     },
     {
       "type": "java",
