@@ -1,6 +1,6 @@
 package graph;
 
-class Edge<T> {
+public class Edge<T> {
   private boolean isDirected = false;
   private Vertex<T> vertex1;
   private Vertex<T> vertex2;
@@ -24,15 +24,15 @@ class Edge<T> {
     this.isDirected = isDirected;
   }
 
-  Vertex<T> getVertex1() {
+  public Vertex<T> getVertex1() {
     return vertex1;
   }
 
-  Vertex<T> getVertex2() {
+  public Vertex<T> getVertex2() {
     return vertex2;
   }
 
-  String getWeight() {
+  public String getWeight() {
     return weight;
   }
 

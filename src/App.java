@@ -5,15 +5,20 @@ import java.util.Set;
 
 import graph.Graph;
 import graph.Vertex;
+import graph.Edge;
 
 public class App {
     public static void main(String[] args) throws Exception {
         Scanner s = new Scanner(System.in);
         int n = s.nextInt();
-        int e = s.nextInt();
         Graph<Integer> graph = new Graph<>(false);
-        for (int i = 0; i < e; i++) {
-            graph.addEdge(s.nextInt(), s.nextInt());
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= n; j++) {
+                int x = s.nextInt();
+                if (x >= 1 && i < j) {
+                    graph.addEdge(i, j, String.valueOf(x));
+                }
+            }
         }
         Set<Vertex<Integer>> part1 = new HashSet<>();
         Set<Vertex<Integer>> part2 = new HashSet<>();
@@ -27,10 +32,16 @@ public class App {
         }
         int cut_size = 0;
         for (Vertex<Integer> vertex : part1) {
-            List<Vertex<Integer>> list = vertex.getAdjacentVertexes();
-            for (Vertex<Integer> adjVertex : list) {
-                if (part2.contains(adjVertex)) {
-                    cut_size += 1;
+            List<Edge<Integer>> list = vertex.getEdges();
+            for (Edge<Integer> edge : list) {
+                Vertex<Integer> vertex2;
+                if (edge.getVertex1().equals(vertex)) {
+                    vertex2 = edge.getVertex2();
+                } else {
+                    vertex2 = edge.getVertex1();
+                }
+                if (part2.contains(vertex2)) {
+                    cut_size += Integer.parseInt(edge.getWeight());
                 }
             }
         }
@@ -71,10 +82,16 @@ public class App {
             part2.add(graph.getVertex(hightestCostVertices[0]));
             int new_cut_size = 0;
             for (Vertex<Integer> vertex : part1) {
-                List<Vertex<Integer>> list = vertex.getAdjacentVertexes();
-                for (Vertex<Integer> adjVertex : list) {
-                    if (part2.contains(adjVertex)) {
-                        new_cut_size += 1;
+                List<Edge<Integer>> list = vertex.getEdges();
+                for (Edge<Integer> edge : list) {
+                    Vertex<Integer> vertex2;
+                    if (edge.getVertex1().equals(vertex)) {
+                        vertex2 = edge.getVertex2();
+                    } else {
+                        vertex2 = edge.getVertex1();
+                    }
+                    if (part2.contains(vertex2)) {
+                        new_cut_size += Integer.parseInt(edge.getWeight());
                     }
                 }
             }
@@ -103,20 +120,32 @@ public class App {
 
     static int getInternalAndExternalEdgeCountDiffernce(Vertex<Integer> vertex, Set<Vertex<Integer>> part) {
         int count = 0;
-        for (Vertex<Integer> adjVertex : vertex.getAdjacentVertexes()) {
-            if (part.contains(adjVertex)) {
-                count--;
+        for (Edge<Integer> edge : vertex.getEdges()) {
+            Vertex<Integer> vertex2;
+            if (edge.getVertex1().equals(vertex)) {
+                vertex2 = edge.getVertex2();
             } else {
-                count++;
+                vertex2 = edge.getVertex1();
+            }
+            if (part.contains(vertex2)) {
+                count -= Integer.parseInt(edge.getWeight());
+            } else {
+                count += Integer.parseInt(edge.getWeight());
             }
         }
         return count;
     }
 
     static int checkEdgeExists(Vertex<Integer> vertex1, Vertex<Integer> vertex2) {
-        for (Vertex<Integer> adjVertex : vertex1.getAdjacentVertexes()) {
-            if (adjVertex == vertex2) {
-                return 1;
+        for (Edge<Integer> edge : vertex1.getEdges()) {
+            Vertex<Integer> v2;
+            if (edge.getVertex1().equals(vertex1)) {
+                v2 = edge.getVertex2();
+            } else {
+                v2 = edge.getVertex1();
+            }
+            if (vertex2 == v2) {
+                return Integer.parseInt(edge.getWeight());
             }
         }
         return 0;

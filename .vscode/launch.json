@@ -6,26 +6,26 @@
   "configurations": [
     {
       "type": "java",
-      "name": "Launch Current File with input 1",
+      "name": "Launch Current File with input 3",
       "request": "launch",
       "mainClass": "${file}",
       "args": [
         "<",
-        "${workspaceFolder}/input1.txt",
+        "${workspaceFolder}/input3.txt",
         ">",
-        "${workspaceFolder}/output1.txt"
+        "${workspaceFolder}/output3.txt"
       ]
     },
     {
       "type": "java",
-      "name": "Launch Current File with input 2",
+      "name": "Launch Current File with input 4",
       "request": "launch",
       "mainClass": "${file}",
       "args": [
         "<",
-        "${workspaceFolder}/input2.txt",
+        "${workspaceFolder}/input4.txt",
         ">",
-        "${workspaceFolder}/output2.txt"
+        "${workspaceFolder}/output4.txt"
       ]
     },
     {
@@ -34,7 +34,7 @@
       "request": "launch",
       "mainClass": "App",
       "projectName": "KernighanLin_53cf84dd",
-      "args": ["<", "${workspaceFolder}/input.txt"]
+      "args": ["<", "${workspaceFolder}/input4.txt"]
     }
   ]
 }
